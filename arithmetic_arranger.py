@@ -42,7 +42,7 @@ def arithmetic_arranger(problems):
     space = 0
     for j in range(len(problems)):
         if (j==0):
-            space = 2
+            space = 2  
         if(int_len1[j]>= int_len2[j]):
             arranged_problems+=(operators[j]+" "+str(sec_int[j])).rjust(int_len1[j]+2)
         else:
