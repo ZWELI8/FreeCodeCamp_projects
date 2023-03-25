@@ -14,14 +14,16 @@ def arithmetic_arranger(problems, bool = False):
    
     space = 0
     if (len(problems) > 5):
-        return "Too many problems."
+        return "Error: Too many problems."
     for prob in problems:
         operators.append(str(prob.split(" ")[1]))
         if((prob.split(" ")[0]).isdigit() and prob.split(" ")[2].isdigit()):
             first_int.append(int(prob.split(" ")[0]))
             sec_int.append(int(prob.split(" ")[2]))
+        elif(len(prob.split(" ")[0])>4 or len(prob.split(" ")[2])>4):
+            return "Error: Numbers cannot be more than four digits."
         else:
-            return "Numbers must only contain digits."
+            return "Error: Numbers must only contain digits."
         
 
         int_len1.append(len(prob.split(" ")[0]))
@@ -30,7 +32,7 @@ def arithmetic_arranger(problems, bool = False):
 
     for sign in operators:
         if (sign != "+" and sign != "-"):
-            return "Operator must be '+' or '-'."
+            return "Error: Operator must be \'+\' or \'-\'."
         elif(sign == '+'):
             answer.append(first_int[count]+sec_int[count])
             count+=1
@@ -73,17 +75,11 @@ def arithmetic_arranger(problems, bool = False):
     
     for x in range(len(problems)):
         if x==0:
-            if(int_len1[j]>= int_len2[j]):
-                arranged_problems+=2*"-"+int_len1[x]*"-"
-            else:
-                arranged_problems+=2*"-"+int_len2[x]*"-"
+            arranged_problems+=(2*"-"+max(int_len1[x],int_len2[x])*"-")
+           
         else:
             arranged_problems+=4*" "
-            if(int_len1[x]>= int_len2[x]):
-               
-                arranged_problems+=2*"-"+int_len1[x]*"-"
-            else:
-                arranged_problems+=2*"-"+int_len2[x]*"-"
+            arranged_problems+=(2*"-"+max(int_len1[x],int_len2[x])*"-")
 
 
 
@@ -102,3 +98,6 @@ def arithmetic_arranger(problems, bool = False):
         return arranged_problems
 
     return ""
+    
+   
+print(arithmetic_arranger(['24 + 85215', '3801 - 2', '45 + 43', '123 + 49']),True)
